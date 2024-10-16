@@ -14,9 +14,9 @@ func ExampleClient_connect_basic() {
 	ctx := context.Background()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "localhost:6379",
-		Username: "yourUsername",
-		Password: "yourPassword",
+		Addr:     "redis-11919.c335.europe-west2-1.gce.redns.redis-cloud.com:11919",
+		Username: "default",
+		Password: "RSDBhtpPhBHHNNnWrJSQxgHQCcYtoNMf",
 		DB:       0,
 	})
 

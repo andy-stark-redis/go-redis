@@ -6,7 +6,10 @@ package example_commands_test
 import (
 	"context"
 	"crypto/tls"
+	"crypto/x509"
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -14,22 +17,28 @@ import (
 func ExampleClient_connect_cluster_tls() {
 	ctx := context.Background()
 
-	// Load client cert
-	cert, err := tls.LoadX509KeyPair("redis_user.crt", "redis_user_private.key")
+	caCert, err := os.ReadFile("/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis_ca.pem")
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
+	caCertPool := x509.NewCertPool()
+	caCertPool.AppendCertsFromPEM(caCert)
+
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{"localhost:6379", "localhost:6380"},
-		Username: "yourUsername",
-		Password: "yourPassword",
+		Addrs:    []string{"redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com:15313"},
+		Username: "default",
+		Password: "MrlnkBuSZqO0s0vicIkLnqJXetbSTCan",
 		TLSConfig: &tls.Config{
-			MinVersion:   tls.VersionTLS12,
-			Certificates: []tls.Certificate{cert},
+			MinVersion: tls.VersionTLS12,
+			RootCAs:    caCertPool,
+			ServerName: "redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com",
 		},
 	})
+	// REMOVE_START
+	rdb.Del(ctx, "foo")
+	// REMOVE_END
 
 	rdb.Set(ctx, "foo", "bar", 0)
 	result, err := rdb.Get(ctx, "foo").Result()

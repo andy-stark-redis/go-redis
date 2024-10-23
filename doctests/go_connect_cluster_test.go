@@ -14,12 +14,13 @@ func ExampleClient_connect_cluster() {
 	ctx := context.Background()
 
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{"localhost:6379", "localhost:6380"},
-		Username: "yourUsername",
-		Password: "yourPassword",
+		Addrs:    []string{"redis-13891.c34425.eu-west-2-mz.ec2.cloud.rlrcp.com:13891"},
+		Username: "default",
+		Password: "wtpet4pI5EgyJHyldPwR7xM7GaZB0EcG",
 	})
 
-	rdb.Set(ctx, "foo", "bar", 0)
+	rdb.Set(ctx, "foo", "bar", 0).Result()
+
 	result, err := rdb.Get(ctx, "foo").Result()
 
 	if err != nil {

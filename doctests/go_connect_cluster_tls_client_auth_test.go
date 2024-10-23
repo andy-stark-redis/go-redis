@@ -18,14 +18,18 @@ func ExampleClient_connect_cluster_tls_client_auth() {
 	ctx := context.Background()
 
 	// Load client cert
-	cert, err := tls.LoadX509KeyPair("redis_user.crt", "redis_user_private.key")
+	cert, err := tls.LoadX509KeyPair(
+		"/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis-db-12605866.crt",
+		"/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis-db-12605866.key",
+	)
 
 	if err != nil {
 		panic(err)
 	}
 
 	// Load CA cert
-	caCert, err := os.ReadFile("redis_ca.pem")
+	caCert, err := os.ReadFile("/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis_ca.pem")
+
 	if err != nil {
 		panic(err)
 	}
@@ -34,13 +38,14 @@ func ExampleClient_connect_cluster_tls_client_auth() {
 	caCertPool.AppendCertsFromPEM(caCert)
 
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{"localhost:6379", "localhost:6380"},
-		Username: "yourUsername",
-		Password: "yourPassword",
+		Addrs:    []string{"redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com:15313"},
+		Username: "default",
+		Password: "MrlnkBuSZqO0s0vicIkLnqJXetbSTCan",
 		TLSConfig: &tls.Config{
 			MinVersion:   tls.VersionTLS12,
 			Certificates: []tls.Certificate{cert},
 			RootCAs:      caCertPool,
+			ServerName:   "redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com",
 		},
 	})
 

@@ -1,8 +1,10 @@
 // EXAMPLE: connect_basic_tls
 
 // STEP_START connect_basic_tls
+// REMOVE_START
 package example_commands_test
 
+// REMOVE_END
 import (
 	"context"
 	"crypto/tls"
@@ -17,7 +19,7 @@ import (
 func ExampleClient_connect_basic_tls() {
 	ctx := context.Background()
 
-	caCert, err := os.ReadFile("/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis_ca.pem")
+	caCert, err := os.ReadFile("<path_to_redis_ca.pem_file>")
 
 	if err != nil {
 		log.Fatal(err)
@@ -27,9 +29,9 @@ func ExampleClient_connect_basic_tls() {
 	caCertPool.AppendCertsFromPEM(caCert)
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "redis-14669.c338.eu-west-2-1.ec2.redns.redis-cloud.com:14669",
+		Addr:     "<host>:<port>",
 		Username: "default",
-		Password: "jj7hRGi1K22vop5IDFvAf8oyeeF98s4h",
+		Password: "<password>",
 		DB:       0,
 		TLSConfig: &tls.Config{
 			MinVersion: tls.VersionTLS12,

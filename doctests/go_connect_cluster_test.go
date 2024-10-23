@@ -1,8 +1,10 @@
 // EXAMPLE: connect_cluster
 
 // STEP_START connect_cluster
+// REMOVE_START
 package example_commands_test
 
+// REMOVE_END
 import (
 	"context"
 	"fmt"
@@ -14,10 +16,13 @@ func ExampleClient_connect_cluster() {
 	ctx := context.Background()
 
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{"redis-13891.c34425.eu-west-2-mz.ec2.cloud.rlrcp.com:13891"},
+		Addrs:    []string{"<host>:<port>"},
 		Username: "default",
-		Password: "wtpet4pI5EgyJHyldPwR7xM7GaZB0EcG",
+		Password: "<password>",
 	})
+	// REMOVE_START
+	rdb.Del(ctx, "foo")
+	// REMOVE_END
 
 	rdb.Set(ctx, "foo", "bar", 0).Result()
 

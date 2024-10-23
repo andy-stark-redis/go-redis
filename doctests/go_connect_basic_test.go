@@ -1,8 +1,9 @@
 // EXAMPLE: connect_basic
-
 // STEP_START connect_basic
+// REMOVE_START
 package example_commands_test
 
+// REMOVE_END
 import (
 	"context"
 	"fmt"
@@ -14,9 +15,9 @@ func ExampleClient_connect_basic() {
 	ctx := context.Background()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     "redis-14669.c338.eu-west-2-1.ec2.redns.redis-cloud.com:14669",
+		Addr:     "<host>:<port>",
 		Username: "default",
-		Password: "jj7hRGi1K22vop5IDFvAf8oyeeF98s4h",
+		Password: "<password>",
 		DB:       0,
 	})
 	// REMOVE_START

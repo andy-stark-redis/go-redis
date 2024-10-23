@@ -1,8 +1,10 @@
 // EXAMPLE: connect_cluster_tls
 
 // STEP_START connect_cluster_tls
+// REMOVE_START
 package example_commands_test
 
+// REMOVE_END
 import (
 	"context"
 	"crypto/tls"

@@ -1,10 +1,7 @@
 // EXAMPLE: connect_cluster
-
 // STEP_START connect_cluster
-// REMOVE_START
 package example_commands_test
 
-// REMOVE_END
 import (
 	"context"
 	"fmt"

@@ -1,9 +1,7 @@
 // EXAMPLE: connect_basic
 // STEP_START connect_basic
-// REMOVE_START
 package example_commands_test
 
-// REMOVE_END
 import (
 	"context"
 	"fmt"

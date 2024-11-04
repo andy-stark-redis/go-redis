@@ -1,10 +1,7 @@
 // EXAMPLE: connect_basic_tls
-
 // STEP_START connect_basic_tls
-// REMOVE_START
 package example_commands_test
 
-// REMOVE_END
 import (
 	"context"
 	"crypto/tls"

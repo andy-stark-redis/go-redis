@@ -1,10 +1,7 @@
 // EXAMPLE: connect_cluster_tls
-
 // STEP_START connect_cluster_tls
-// REMOVE_START
 package example_commands_test
 
-// REMOVE_END
 import (
 	"context"
 	"crypto/tls"
@@ -19,7 +16,7 @@ import (
 func ExampleClient_connect_cluster_tls() {
 	ctx := context.Background()
 
-	caCert, err := os.ReadFile("/Users/andrew.stark/Documents/Repos/forks/go-redis/doctests/redis_ca.pem")
+	caCert, err := os.ReadFile("<path_to_redis_ca.pem_file>")
 
 	if err != nil {
 		log.Fatal(err)
@@ -29,13 +26,13 @@ func ExampleClient_connect_cluster_tls() {
 	caCertPool.AppendCertsFromPEM(caCert)
 
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{"redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com:15313"},
+		Addrs:    []string{"<host>:<port"},
 		Username: "default",
-		Password: "MrlnkBuSZqO0s0vicIkLnqJXetbSTCan",
+		Password: "<password>",
 		TLSConfig: &tls.Config{
 			MinVersion: tls.VersionTLS12,
 			RootCAs:    caCertPool,
-			ServerName: "redis-15313.c34461.eu-west-2-mz.ec2.cloud.rlrcp.com",
+			ServerName: "<host>",
 		},
 	})
 	// REMOVE_START
